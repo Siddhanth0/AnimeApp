@@ -43,6 +43,7 @@ android {
 
 dependencies {
     implementation(libs.hilt.navigation.compose)
+    implementation(libs.androidx.material.icons.extended)
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
     implementation(libs.hilt.android)
