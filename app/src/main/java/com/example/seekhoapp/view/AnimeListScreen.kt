@@ -1,5 +1,6 @@
 package com.example.seekhoapp.view
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -30,7 +31,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight.Companion.Bold
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.seekhoapp.data.model.Data
 import com.example.seekhoapp.data.remote.Resource
@@ -56,13 +59,15 @@ fun AnimeListScreen(
         }
         is Resource.Success -> {
             val animeList: List<Data> = (state as? Resource.Success<List<Data>>)?.data ?: emptyList()
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(8.dp)
-            ) {
-                items(animeList) { anime ->
-                    AnimeListItemCard(anime, onAnimeClick)
+            Column(Modifier.padding(8.dp).fillMaxSize()){
+                Text("Anime List", modifier = Modifier.align(Alignment.CenterHorizontally), fontSize = 28.sp, style = MaterialTheme.typography.displaySmall)
+                LazyColumn(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                        ) {
+                    items(animeList) { anime ->
+                        AnimeListItemCard(anime, onAnimeClick)
+                    }
                 }
             }
         }
@@ -97,7 +102,7 @@ fun AnimeListItemCard(anime: Data, onClick: (Int) -> Unit) {
             )
             Spacer(Modifier.width(16.dp))
             Column {
-                Text(text = anime.title, style = MaterialTheme.typography.headlineSmall)
+                Text(text = anime.title, style = MaterialTheme.typography.titleLarge)
                 Row {
                     Text(text = "Episodes: ${anime.episodes}")
                     Spacer(modifier = Modifier.width(8.dp))
